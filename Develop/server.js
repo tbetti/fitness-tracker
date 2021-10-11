@@ -15,7 +15,7 @@ app.use(express.static('public'));
 
 // Connect to mongoose
 mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/db", 
+    process.env.MONGODB_URI || "mongodb://localhost/fitnessdb", 
     {useNewUrlParser: true}
 );
 
