@@ -4,7 +4,6 @@ const { Workout } = require('../models');
 // Get last workout
 router.get('/', (req, res) =>{
     Workout.find()
-        .populate('exercises')
         .then(data =>{
             res.json(data);
         })
@@ -13,8 +12,20 @@ router.get('/', (req, res) =>{
         });
 });
 
-// // Add exercise
-// router.put('/:id');
+// Add exercise - push into exercise array
+router.put('/:id', (req, res) =>{
+    console.log(req.body);
+    Workout.updateOne(
+        {_id: req.params.id},
+        {$push: {exercises: req.body}}
+    )
+    .then(data =>{
+        res.json(data);
+    })
+    .catch(err =>{
+        res.status(400).json(err);
+    })
+});
 
 // Create workout
 router.post('/', ({body}, res) =>{
