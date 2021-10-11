@@ -1,4 +1,5 @@
-const Schema = require('mongoose').Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // Define schema
 const ExcerciseSchema = new Schema({
