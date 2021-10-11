@@ -1,2 +1,13 @@
+const Schema = require('mongoose').Schema;
 
-module.exports = { Workout };
+const WorkoutSchema = new Schema({
+    day:{
+        type: Date,
+    },
+    exercises: [{
+        type: Schema.Types.ObjectId,
+        ref: "Excercise"
+    }]
+});
+
+module.exports = Workout;
