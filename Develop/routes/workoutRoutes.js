@@ -1,9 +1,10 @@
 const router = require('express').Router();
-const { Workout, Exercise } = require('../models');
+const { Workout } = require('../models');
 
-// Get all workouts
+// Get last workout
 router.get('/', (req, res) =>{
     Workout.find()
+        .populate('exercises')
         .then(data =>{
             res.json(data);
         })
@@ -12,13 +13,21 @@ router.get('/', (req, res) =>{
         });
 });
 
-// // Create a new workout
-// router.post('/');
-
-// // Edit a workout
+// // Add exercise
 // router.put('/:id');
 
-// // Get a range of workouts
+// Create workout
+router.post('/', ({body}, res) =>{
+    Workout.insert(body)
+    .then(data =>{
+        res.json(data);
+    })
+    .catch(err=>{
+        res.status(400).json(err);
+    });
+});
+
+// // Get workouts in range
 // router.get('/range');
 
 module.exports = router;
