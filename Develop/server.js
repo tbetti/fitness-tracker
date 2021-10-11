@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const routes = require('./routes/index');
 
 // Connect to packages
 const app = express();
@@ -12,10 +13,11 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static('public'));
+app.use(routes);
 
 // Connect to mongoose
 mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/fitnessdb", 
+    process.env.MONGODB_URI || "mongodb://localhost/workout", 
     {useNewUrlParser: true}
 );
 
