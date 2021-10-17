@@ -2,7 +2,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const routes = require('./routes/index');
+const apiRoutes = require('./routes/apiRoutes');
+const viewRoutes = require('./routes/viewRoutes');
 
 // Connect to packages
 const app = express();
@@ -12,13 +13,18 @@ app.use(morgan("dev"));
 // Set middleware
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+// Connect backend and front end
 app.use(express.static('public'));
-app.use(routes);
+app.use(apiRoutes);
+app.use(viewRoutes);
 
 // Connect to mongoose
 mongoose.connect(
     process.env.MONGODB_URI || "mongodb://localhost/workout", 
-    {useNewUrlParser: true}
+    {
+        useNewUrlParser: true,
+        useFindAndModify: false
+    },
 );
 
 // Connect to port
