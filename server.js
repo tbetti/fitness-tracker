@@ -20,7 +20,7 @@ app.use(viewRoutes);
 
 // Connect to mongoose
 mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/workout",
+    "mongodb+srv://tbetti:password2017@cluster0.wz5fu.mongodb.net/workout?retryWrites=true&w=majority" || "mongodb://localhost/workout",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
